@@ -74,7 +74,6 @@ przy u¿yciu kodeka Speex).
 %setup -q
 
 %build
-#rm -f missing
 %{__libtoolize}
 %{__aclocal}
 %{__autoconf}
