@@ -6,6 +6,7 @@ Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://www.speex.org/download/%{name}-%{version}.tar.gz
+# Source0-md5:	d4ea30440a57ce5a57e915c46a5b7163
 URL:		http://www.speex.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
