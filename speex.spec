@@ -44,6 +44,7 @@ Summary:	Speex static library
 Summary(pl):	Biblioteka statyczna Speex
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{version}
+Obsoletes:	Speex-static
 
 %description static
 Speex static library.
@@ -56,6 +57,7 @@ Summary:	speexdec and speexenc utilities
 Summary(pl):	Narzêdzia speexdec i speexenc
 Group:		Applications/Sound
 Requires:	%{name} = %{version}
+Obsoletes:	Speex-progs
 
 %description progs
 Utilities for the Speex codec: speexdec (decodes a Speex file and
