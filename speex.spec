@@ -11,8 +11,8 @@ BuildRequires:	autoconf
 BuildRequires:	automake
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
-Obsoletes:	Speex
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+Obsoletes:	Speex
 
 %description
 Speex is a patent-free audio codec designed especially for voice
