@@ -3,7 +3,7 @@ Summary(pl):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
 Version:	1.0
 Release:	1
-License:	LGPL
+License:	BSD
 Group:		Libraries
 Source0:	http://www.speex.org/download/%{name}-%{version}.tar.gz
 URL:		http://www.speex.org/
@@ -23,8 +23,8 @@ to the Vorbis codec.
 %description -l pl
 Speex jest wolnym od patentów kodekiem audio zaprojektowanym dla
 kompresji mowy (w odró¿nieniu od Vorbisa, który jest ogólnego
-przeznaczenia). Zapewnia dobr± jako¶æ nawet przy niskim pa¶mie. Projekt
-chcia³by byæ dodatkiem do kodeka Vorbis.
+przeznaczenia). Zapewnia dobr± jako¶æ nawet przy niskim pa¶mie.
+Projekt chcia³by byæ dodatkiem do kodeka Vorbis.
 
 %package devel
 Summary:	Speex library - development files
@@ -97,12 +97,12 @@ rm -rf $RPM_BUILD_ROOT
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS ChangeLog NEWS README TODO
-%attr(755,root,root) %{_libdir}/libspeex.so.1.0.0
-%{_docdir}/%{name}
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
+%attr(755,root,root) %{_libdir}/libspeex.so.*.*.*
 
 %files devel
 %defattr(644,root,root,755)
+%doc doc/manual.pdf
 %{_libdir}/libspeex.so
 %{_libdir}/lib*.la
 %{_includedir}/*.h
