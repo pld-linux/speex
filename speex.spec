@@ -1,12 +1,12 @@
 Summary:	An open-source, patent-free speech codec
 Summary(pl):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
-Version:	1.1.1
+Version:	1.1.2
 Release:	1
 License:	BSD
 Group:		Libraries
 Source0:	http://www.speex.org/download/%{name}-%{version}.tar.gz
-# Source0-md5:	af08418253fc51fbdc26777075bb0585
+# Source0-md5:	fede14ecf233e9bb815e0aa403b773cc
 URL:		http://www.speex.org/
 BuildRequires:	autoconf
 BuildRequires:	automake
