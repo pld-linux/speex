@@ -79,7 +79,8 @@ przy u¿yciu kodeka Speex).
 %{__autoconf}
 %{__automake}
 %configure \
-	--enable-shared
+	--enable-shared \
+	--with-ogg-libraries=%{_libdir}
 %{__make}
 
 %install
