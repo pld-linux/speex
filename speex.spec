@@ -1,20 +1,22 @@
 Summary:	An open-source, patent-free speech codec
 Summary(pl):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
-Version:	1.1.5
+Version:	1.1.6
 Release:	1
 Epoch:		1
 License:	BSD
 Group:		Libraries
 Source0:	http://www.speex.org/download/%{name}-%{version}.tar.gz
-# Source0-md5:	416dbe6c41aabfd289b6d7d4522a8d93
+# Source0-md5:	57a2a65013e85ef2b733177655a75f28
+Patch0:		%{name}-am18.patch
+Patch1:		%{name}-pc.patch
 URL:		http://www.speex.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 Obsoletes:	Speex
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Speex is a patent-free audio codec designed especially for voice
@@ -73,6 +75,8 @@ przy u¿yciu kodeka Speex).
 
 %prep
 %setup -q
+%patch0 -p1
+%patch1 -p1
 
 %build
 %{__libtoolize}
@@ -106,7 +110,9 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libspeex.so
 %{_libdir}/lib*.la
-%{_includedir}/*.h
+%{_includedir}/speex
+%{_aclocaldir}/speex.m4
+%{_pkgconfigdir}/speex.pc
 
 %files static
 %defattr(644,root,root,755)
