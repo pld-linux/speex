@@ -3,6 +3,7 @@ Summary(pl):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
 Version:	1.1.4
 Release:	1
+Epoch:		1
 License:	BSD
 Group:		Libraries
 Source0:	http://www.speex.org/download/%{name}-%{version}.tar.gz
@@ -31,7 +32,7 @@ Projekt chcia³by byæ dodatkiem do kodeka Vorbis.
 Summary:	Speex library - development files
 Summary(pl):	Pliki dla programistów u¿ywaj±cych biblioteki Speex
 Group:		Development/Libraries
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-devel
 
 %description devel
@@ -44,7 +45,7 @@ Pliki dla programistów u¿ywaj±cych biblioteki Speex.
 Summary:	Speex static library
 Summary(pl):	Biblioteka statyczna Speex
 Group:		Development/Libraries
-Requires:	%{name}-devel = %{version}
+Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-static
 
 %description static
@@ -57,7 +58,7 @@ Biblioteka statyczna Speex.
 Summary:	speexdec and speexenc utilities
 Summary(pl):	Narzêdzia speexdec i speexenc
 Group:		Applications/Sound
-Requires:	%{name} = %{version}
+Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-progs
 
 %description progs
@@ -103,7 +104,6 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
-%doc doc/manual.pdf
 %attr(755,root,root) %{_libdir}/libspeex.so
 %{_libdir}/lib*.la
 %{_includedir}/*.h
