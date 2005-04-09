@@ -2,7 +2,7 @@ Summary:	An open-source, patent-free speech codec
 Summary(pl):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
 Version:	1.1.7
-Release:	1
+Release:	2
 Epoch:		1
 License:	BSD
 Group:		Libraries
@@ -91,9 +91,12 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	docdir=%{_docdir}/%{name}
 
+%{__sed} -i -e "s,includedir=.*,includedir=%{_includedir}/speex,g" speex.pc $RPM_BUILD_ROOT%{_pkgconfigdir}/speex.pc
+
 %clean
 rm -rf $RPM_BUILD_ROOT
 
+%{__sed} -i -e 
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
