@@ -91,12 +91,10 @@ rm -rf $RPM_BUILD_ROOT
 	DESTDIR=$RPM_BUILD_ROOT \
 	docdir=%{_docdir}/%{name}
 
-%{__sed} -i -e "s,includedir=.*,includedir=%{_includedir}/speex,g" speex.pc $RPM_BUILD_ROOT%{_pkgconfigdir}/speex.pc
-
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%{__sed} -i -e 
+
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
