@@ -4,7 +4,7 @@
 #
 %define		_rc	beta1
 Summary:	An open-source, patent-free speech codec
-Summary(pl):	Otwarty kodek mowy, wolny od patentów
+Summary(pl.UTF-8):   Otwarty kodek mowy, wolny od patentÃ³w
 Name:		speex
 Version:	1.2
 Release:	%{_rc}.2
@@ -27,15 +27,15 @@ Speex is a patent-free audio codec designed especially for voice
 narrowband and wideband quality. This project aims to be complementary
 to the Vorbis codec.
 
-%description -l pl
-Speex jest wolnym od patentów kodekiem audio zaprojektowanym dla
-kompresji mowy (w odró¿nieniu od Vorbisa, który jest ogólnego
-przeznaczenia). Zapewnia dobr± jako¶æ nawet przy niskim pa¶mie.
-Projekt chcia³by byæ dodatkiem do kodeka Vorbis.
+%description -l pl.UTF-8
+Speex jest wolnym od patentÃ³w kodekiem audio zaprojektowanym dla
+kompresji mowy (w odrÃ³Å¼nieniu od Vorbisa, ktÃ³ry jest ogÃ³lnego
+przeznaczenia). Zapewnia dobrÄ… jakoÅ›Ä‡ nawet przy niskim paÅ›mie.
+Projekt chciaÅ‚by byÄ‡ dodatkiem do kodeka Vorbis.
 
 %package devel
 Summary:	Speex library - development files
-Summary(pl):	Pliki dla programistów u¿ywaj±cych biblioteki Speex
+Summary(pl.UTF-8):   Pliki dla programistÃ³w uÅ¼ywajÄ…cych biblioteki Speex
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-devel
@@ -43,12 +43,12 @@ Obsoletes:	Speex-devel
 %description devel
 Speex library - development files.
 
-%description devel -l pl
-Pliki dla programistów u¿ywaj±cych biblioteki Speex.
+%description devel -l pl.UTF-8
+Pliki dla programistÃ³w uÅ¼ywajÄ…cych biblioteki Speex.
 
 %package static
 Summary:	Speex static library
-Summary(pl):	Biblioteka statyczna Speex
+Summary(pl.UTF-8):   Biblioteka statyczna Speex
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-static
@@ -56,12 +56,12 @@ Obsoletes:	Speex-static
 %description static
 Speex static library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteka statyczna Speex.
 
 %package progs
 Summary:	speexdec and speexenc utilities
-Summary(pl):	Narzêdzia speexdec i speexenc
+Summary(pl.UTF-8):   NarzÄ™dzia speexdec i speexenc
 Group:		Applications/Sound
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-progs
@@ -71,10 +71,10 @@ Utilities for the Speex codec: speexdec (decodes a Speex file and
 produces a WAV or raw file) and speexenc (encodes file from WAV or
 raw format using Speex).
 
-%description progs -l pl
-Narzêdzia do kodeka Speex: speexdec (dekoduj±ce plik Speex i tworz±ce
-plik WAV lub raw) oraz speexenc (koduj±cy plik z formatu WAV lub raw
-przy u¿yciu kodeka Speex).
+%description progs -l pl.UTF-8
+NarzÄ™dzia do kodeka Speex: speexdec (dekodujÄ…ce plik Speex i tworzÄ…ce
+plik WAV lub raw) oraz speexenc (kodujÄ…cy plik z formatu WAV lub raw
+przy uÅ¼yciu kodeka Speex).
 
 %prep
 %setup -q -n %{name}-%{version}%{_rc}
