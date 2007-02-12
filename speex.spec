@@ -4,7 +4,7 @@
 #
 %define		_rc	beta1
 Summary:	An open-source, patent-free speech codec
-Summary(pl.UTF-8):   Otwarty kodek mowy, wolny od patentów
+Summary(pl.UTF-8):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
 Version:	1.2
 Release:	%{_rc}.2
@@ -35,7 +35,7 @@ Projekt chciałby być dodatkiem do kodeka Vorbis.
 
 %package devel
 Summary:	Speex library - development files
-Summary(pl.UTF-8):   Pliki dla programistów używających biblioteki Speex
+Summary(pl.UTF-8):	Pliki dla programistów używających biblioteki Speex
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-devel
@@ -48,7 +48,7 @@ Pliki dla programistów używających biblioteki Speex.
 
 %package static
 Summary:	Speex static library
-Summary(pl.UTF-8):   Biblioteka statyczna Speex
+Summary(pl.UTF-8):	Biblioteka statyczna Speex
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-static
@@ -61,7 +61,7 @@ Biblioteka statyczna Speex.
 
 %package progs
 Summary:	speexdec and speexenc utilities
-Summary(pl.UTF-8):   Narzędzia speexdec i speexenc
+Summary(pl.UTF-8):	Narzędzia speexdec i speexenc
 Group:		Applications/Sound
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-progs
