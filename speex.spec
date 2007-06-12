@@ -2,17 +2,17 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		_rc	beta1
+%define		bver	beta2
 Summary:	An open-source, patent-free speech codec
 Summary(pl.UTF-8):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
 Version:	1.2
-Release:	%{_rc}.2
+Release:	%{bver}.2
 Epoch:		1
 License:	BSD
 Group:		Libraries
-Source0:	http://downloads.xiph.org/releases/speex/%{name}-%{version}%{_rc}.tar.gz
-# Source0-md5:	aac2e4ba42122b885c787ea280acb3d9
+Source0:	http://downloads.xiph.org/releases/speex/%{name}-%{version}%{bver}.tar.gz
+# Source0-md5:	5480fa53a7451603ecb57ff815c87ac0
 URL:		http://www.speex.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -77,7 +77,7 @@ plik WAV lub raw) oraz speexenc (kodujący plik z formatu WAV lub raw
 przy użyciu kodeka Speex).
 
 %prep
-%setup -q -n %{name}-%{version}%{_rc}
+%setup -q -n %{name}-%{version}%{bver}
 
 %build
 %{__libtoolize}
@@ -111,7 +111,7 @@ rm -rf $RPM_BUILD_ROOT
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libspeex.so
-%{_libdir}/lib*.la
+%{_libdir}/libspeex.la
 %{_includedir}/speex
 %{_aclocaldir}/speex.m4
 %{_pkgconfigdir}/speex.pc
@@ -119,7 +119,7 @@ rm -rf $RPM_BUILD_ROOT
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libspeex.a
 %endif
 
 %files progs
