@@ -2,7 +2,7 @@
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
 #
-%define		bver	beta2
+%define		bver	beta3
 %define		rel		3
 Summary:	An open-source, patent-free speech codec
 Summary(pl.UTF-8):	Otwarty kodek mowy, wolny od patentów
@@ -13,7 +13,7 @@ Epoch:		1
 License:	BSD
 Group:		Libraries
 Source0:	http://downloads.xiph.org/releases/speex/%{name}-%{version}%{bver}.tar.gz
-# Source0-md5:	5480fa53a7451603ecb57ff815c87ac0
+# Source0-md5:	bcada04dc663a725ee7fcfa6301520a3
 URL:		http://www.speex.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -108,22 +108,31 @@ rm -rf $RPM_BUILD_ROOT
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README TODO doc/manual.pdf
 %attr(755,root,root) %{_libdir}/libspeex.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libspeex.so.1
+%attr(755,root,root) %{_libdir}/libspeexdsp.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libspeexdsp.so.1
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libspeex.so
+%attr(755,root,root) %{_libdir}/libspeexdsp.so
 %{_libdir}/libspeex.la
+%{_libdir}/libspeexdsp.la
 %{_includedir}/speex
 %{_aclocaldir}/speex.m4
 %{_pkgconfigdir}/speex.pc
+%{_pkgconfigdir}/speexdsp.pc
 
 %if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
 %{_libdir}/libspeex.a
+%{_libdir}/libspeexdsp.a
 %endif
 
 %files progs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
-%{_mandir}/man1/*.1*
+%attr(755,root,root) %{_bindir}/speexdec
+%attr(755,root,root) %{_bindir}/speexenc
+%{_mandir}/man1/speexdec.1*
+%{_mandir}/man1/speexenc.1*
