@@ -1,20 +1,27 @@
+#
+# Conditional build:
+%bcond_without	static_libs	# don't build static library
+#
+%define		bver	rc1
+%define		rel	1
 Summary:	An open-source, patent-free speech codec
-Summary(pl):	Otwarty kodek mowy, wolny od patentów
+Summary(pl.UTF-8):	Otwarty kodek mowy, wolny od patentÃ³w
 Name:		speex
-Version:	1.1.5
-Release:	1
+Version:	1.2
+Release:	%{bver}.%{rel}
 Epoch:		1
 License:	BSD
 Group:		Libraries
-Source0:	http://www.speex.org/download/%{name}-%{version}.tar.gz
-# Source0-md5:	416dbe6c41aabfd289b6d7d4522a8d93
+Source0:	http://downloads.xiph.org/releases/speex/%{name}-%{version}%{bver}.tar.gz
+# Source0-md5:	c4438b22c08e5811ff10e2b06ee9b9ae
 URL:		http://www.speex.org/
-BuildRequires:	autoconf
+BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
-BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
+BuildRequires:	pkgconfig
 Obsoletes:	Speex
+BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
 Speex is a patent-free audio codec designed especially for voice
@@ -22,15 +29,15 @@ Speex is a patent-free audio codec designed especially for voice
 narrowband and wideband quality. This project aims to be complementary
 to the Vorbis codec.
 
-%description -l pl
-Speex jest wolnym od patentów kodekiem audio zaprojektowanym dla
-kompresji mowy (w odró¿nieniu od Vorbisa, który jest ogólnego
-przeznaczenia). Zapewnia dobr± jako¶æ nawet przy niskim pa¶mie.
-Projekt chcia³by byæ dodatkiem do kodeka Vorbis.
+%description -l pl.UTF-8
+Speex jest wolnym od patentÃ³w kodekiem audio zaprojektowanym dla
+kompresji mowy (w odrÃ³Å¼nieniu od Vorbisa, ktÃ³ry jest ogÃ³lnego
+przeznaczenia). Zapewnia dobrÄ… jakoÅ›Ä‡ nawet przy niskim paÅ›mie.
+Projekt chciaÅ‚by byÄ‡ dodatkiem do kodeka Vorbis.
 
 %package devel
 Summary:	Speex library - development files
-Summary(pl):	Pliki dla programistów u¿ywaj±cych biblioteki Speex
+Summary(pl.UTF-8):	Pliki dla programistÃ³w uÅ¼ywajÄ…cych biblioteki Speex
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-devel
@@ -38,12 +45,12 @@ Obsoletes:	Speex-devel
 %description devel
 Speex library - development files.
 
-%description devel -l pl
-Pliki dla programistów u¿ywaj±cych biblioteki Speex.
+%description devel -l pl.UTF-8
+Pliki dla programistÃ³w uÅ¼ywajÄ…cych biblioteki Speex.
 
 %package static
 Summary:	Speex static library
-Summary(pl):	Biblioteka statyczna Speex
+Summary(pl.UTF-8):	Biblioteka statyczna Speex
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-static
@@ -51,12 +58,12 @@ Obsoletes:	Speex-static
 %description static
 Speex static library.
 
-%description static -l pl
+%description static -l pl.UTF-8
 Biblioteka statyczna Speex.
 
 %package progs
 Summary:	speexdec and speexenc utilities
-Summary(pl):	Narzêdzia speexdec i speexenc
+Summary(pl.UTF-8):	NarzÄ™dzia speexdec i speexenc
 Group:		Applications/Sound
 Requires:	%{name} = %{epoch}:%{version}-%{release}
 Obsoletes:	Speex-progs
@@ -66,13 +73,13 @@ Utilities for the Speex codec: speexdec (decodes a Speex file and
 produces a WAV or raw file) and speexenc (encodes file from WAV or
 raw format using Speex).
 
-%description progs -l pl
-Narzêdzia do kodeka Speex: speexdec (dekoduj±ce plik Speex i tworz±ce
-plik WAV lub raw) oraz speexenc (koduj±cy plik z formatu WAV lub raw
-przy u¿yciu kodeka Speex).
+%description progs -l pl.UTF-8
+NarzÄ™dzia do kodeka Speex: speexdec (dekodujÄ…ce plik Speex i tworzÄ…ce
+plik WAV lub raw) oraz speexenc (kodujÄ…cy plik z formatu WAV lub raw
+przy uÅ¼yciu kodeka Speex).
 
 %prep
-%setup -q
+%setup -q -n %{name}-%{version}%{bver}
 
 %build
 %{__libtoolize}
@@ -80,8 +87,8 @@ przy u¿yciu kodeka Speex).
 %{__autoconf}
 %{__automake}
 %configure \
-	--enable-shared \
-	--with-ogg-libraries=%{_libdir}
+	--with-ogg-libraries=%{_libdir} \
+	%{!?with_static_libs:--disable-static}
 %{__make}
 
 %install
@@ -94,25 +101,39 @@ rm -rf $RPM_BUILD_ROOT
 %clean
 rm -rf $RPM_BUILD_ROOT
 
-%post   -p /sbin/ldconfig
+
+%post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
 %doc AUTHORS COPYING ChangeLog NEWS README TODO doc/manual.pdf
 %attr(755,root,root) %{_libdir}/libspeex.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libspeex.so.1
+%attr(755,root,root) %{_libdir}/libspeexdsp.so.*.*.*
+%attr(755,root,root) %ghost %{_libdir}/libspeexdsp.so.1
 
 %files devel
 %defattr(644,root,root,755)
 %attr(755,root,root) %{_libdir}/libspeex.so
-%{_libdir}/lib*.la
-%{_includedir}/*.h
+%attr(755,root,root) %{_libdir}/libspeexdsp.so
+%{_libdir}/libspeex.la
+%{_libdir}/libspeexdsp.la
+%{_includedir}/speex
+%{_aclocaldir}/speex.m4
+%{_pkgconfigdir}/speex.pc
+%{_pkgconfigdir}/speexdsp.pc
 
+%if %{with static_libs}
 %files static
 %defattr(644,root,root,755)
-%{_libdir}/lib*.a
+%{_libdir}/libspeex.a
+%{_libdir}/libspeexdsp.a
+%endif
 
 %files progs
 %defattr(644,root,root,755)
-%attr(755,root,root) %{_bindir}/*
-%{_mandir}/man1/*.1*
+%attr(755,root,root) %{_bindir}/speexdec
+%attr(755,root,root) %{_bindir}/speexenc
+%{_mandir}/man1/speexdec.1*
+%{_mandir}/man1/speexenc.1*
