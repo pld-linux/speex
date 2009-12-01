@@ -19,6 +19,7 @@ BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
+BuildRequires:	pkgconfig
 Obsoletes:	Speex
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
