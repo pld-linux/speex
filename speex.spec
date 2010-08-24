@@ -3,7 +3,7 @@
 %bcond_without	static_libs	# don't build static library
 #
 %define		bver	rc1
-%define		rel	1
+%define		rel	2
 Summary:	An open-source, patent-free speech codec
 Summary(pl.UTF-8):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
