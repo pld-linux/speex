@@ -1,19 +1,20 @@
 #
 # Conditional build:
 %bcond_without	static_libs	# don't build static library
-#
-%define		bver	rc1
-%define		rel	2
+
+%define		subver	rc1
+%define		rel	3
 Summary:	An open-source, patent-free speech codec
 Summary(pl.UTF-8):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
 Version:	1.2
-Release:	%{bver}.%{rel}
+Release:	%{subver}.%{rel}
 Epoch:		1
 License:	BSD
 Group:		Libraries
-Source0:	http://downloads.xiph.org/releases/speex/%{name}-%{version}%{bver}.tar.gz
+Source0:	http://downloads.xiph.org/releases/speex/%{name}-%{version}%{subver}.tar.gz
 # Source0-md5:	c4438b22c08e5811ff10e2b06ee9b9ae
+Patch0:		%{name}_1.2~rc1-7.diff
 URL:		http://www.speex.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake
@@ -70,8 +71,8 @@ Obsoletes:	Speex-progs
 
 %description progs
 Utilities for the Speex codec: speexdec (decodes a Speex file and
-produces a WAV or raw file) and speexenc (encodes file from WAV or
-raw format using Speex).
+produces a WAV or raw file) and speexenc (encodes file from WAV or raw
+format using Speex).
 
 %description progs -l pl.UTF-8
 Narzędzia do kodeka Speex: speexdec (dekodujące plik Speex i tworzące
@@ -79,7 +80,8 @@ plik WAV lub raw) oraz speexenc (kodujący plik z formatu WAV lub raw
 przy użyciu kodeka Speex).
 
 %prep
-%setup -q -n %{name}-%{version}%{bver}
+%setup -q -n %{name}-%{version}%{subver}
+%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -93,21 +95,19 @@ przy użyciu kodeka Speex).
 
 %install
 rm -rf $RPM_BUILD_ROOT
-
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
-	docdir=%{_docdir}/%{name}
+	doc_DATA=
 
 %clean
 rm -rf $RPM_BUILD_ROOT
-
 
 %post	-p /sbin/ldconfig
 %postun -p /sbin/ldconfig
 
 %files
 %defattr(644,root,root,755)
-%doc AUTHORS COPYING ChangeLog NEWS README TODO doc/manual.pdf
+%doc AUTHORS COPYING ChangeLog NEWS README TODO
 %attr(755,root,root) %{_libdir}/libspeex.so.*.*.*
 %attr(755,root,root) %ghost %{_libdir}/libspeex.so.1
 %attr(755,root,root) %{_libdir}/libspeexdsp.so.*.*.*
@@ -115,6 +115,7 @@ rm -rf $RPM_BUILD_ROOT
 
 %files devel
 %defattr(644,root,root,755)
+%doc doc/manual.pdf
 %attr(755,root,root) %{_libdir}/libspeex.so
 %attr(755,root,root) %{_libdir}/libspeexdsp.so
 %{_libdir}/libspeex.la
