@@ -1,5 +1,6 @@
 #
 # Conditional build:
+%bcond_with	bootstrap	# bootstrap from <= 1.2-rc1 (with speexdsp in base)
 %bcond_without	static_libs	# don't build static library
 
 Summary:	An open-source, patent-free speech codec
@@ -20,6 +21,12 @@ BuildRequires:	automake
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
+%if %{with bootstrap}
+BuildRequires:	speex-devel >= 1:1.2-beta3
+BuildRequires:	speex-devel < 1:1.2-rc2
+%else
+BuildRequires:	speexdsp-devel >= 1.2
+%endif
 Obsoletes:	Speex
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
