@@ -8,7 +8,7 @@ Summary(pl.UTF-8):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
 Version:	1.2
 %define	subver	rc2
-%define	rel	1
+%define	rel	2
 Release:	%{subver}.%{rel}
 Epoch:		1
 License:	BSD
