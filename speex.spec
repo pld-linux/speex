@@ -1,23 +1,26 @@
 #
 # Conditional build:
 %bcond_with	bootstrap	# bootstrap from <= 1.2-rc1 (with speexdsp in base)
+%bcond_with	sse		# SSE support (no runtime detection)
 %bcond_without	static_libs	# don't build static library
 
+%ifarch pentium3 pentium4 %{x8664}
+%define	with_sse	1
+%endif
 Summary:	An open-source, patent-free speech codec
 Summary(pl.UTF-8):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
-Version:	1.2
-%define	subver	rc2
-%define	rel	2
-Release:	%{subver}.%{rel}
+Version:	1.2.0
+Release:	1
 Epoch:		1
 License:	BSD
 Group:		Libraries
-Source0:	http://downloads.xiph.org/releases/speex/%{name}-%{version}%{subver}.tar.gz
-# Source0-md5:	6ae7db3bab01e1d4b86bacfa8ca33e81
+Source0:	http://downloads.xiph.org/releases/speex/%{name}-%{version}.tar.gz
+# Source0-md5:	8ab7bb2589110dfaf0ed7fa7757dc49c
+Patch0:		%{name}-ac.patch
 URL:		http://www.speex.org/
 BuildRequires:	autoconf >= 2.50
-BuildRequires:	automake
+BuildRequires:	automake >= 1:1.8
 BuildRequires:	libogg-devel
 BuildRequires:	libtool
 BuildRequires:	pkgconfig
@@ -86,15 +89,18 @@ plik WAV lub raw) oraz speexenc (kodujący plik z formatu WAV lub raw
 przy użyciu kodeka Speex).
 
 %prep
-%setup -q -n %{name}-%{version}%{subver}
+%setup -q
+%patch0 -p1
 
 %build
 %{__libtoolize}
-%{__aclocal}
+%{__aclocal} -I m4
 %{__autoconf}
+%{__autoheader}
 %{__automake}
 %configure \
-	--with-ogg-libraries=%{_libdir} \
+	%{?with_sse:--enable-sse} \
+	--disable-silent-rules \
 	%{!?with_static_libs:--disable-static}
 %{__make}
 
