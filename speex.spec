@@ -1,6 +1,5 @@
 #
 # Conditional build:
-%bcond_with	bootstrap	# bootstrap from <= 1.2-rc1 (with speexdsp in base)
 %bcond_with	sse		# SSE support (no runtime detection)
 %bcond_without	static_libs	# don't build static library
 
@@ -10,27 +9,21 @@
 Summary:	An open-source, patent-free speech codec
 Summary(pl.UTF-8):	Otwarty kodek mowy, wolny od patentów
 Name:		speex
-Version:	1.2.0
+Version:	1.2.1
 Release:	1
 Epoch:		1
 License:	BSD
 Group:		Libraries
-Source0:	http://downloads.xiph.org/releases/speex/%{name}-%{version}.tar.gz
-# Source0-md5:	8ab7bb2589110dfaf0ed7fa7757dc49c
-Patch0:		%{name}-ac.patch
-URL:		http://www.speex.org/
+Source0:	https://downloads.xiph.org/releases/speex/%{name}-%{version}.tar.gz
+# Source0-md5:	fe7bf610883ff202092b92c72fe0fe3e
+URL:		https://www.speex.org/
 BuildRequires:	autoconf >= 2.50
 BuildRequires:	automake >= 1:1.8
 BuildRequires:	libogg-devel
-BuildRequires:	libtool
+BuildRequires:	libtool >= 2:2
 BuildRequires:	pkgconfig
-%if %{with bootstrap}
-BuildRequires:	speex-devel >= 1:1.2-beta3
-BuildRequires:	speex-devel < 1:1.2-rc2
-%else
 BuildRequires:	speexdsp-devel >= 1.2
-%endif
-Obsoletes:	Speex
+Obsoletes:	Speex < 1.1
 BuildRoot:	%{tmpdir}/%{name}-%{version}-root-%(id -u -n)
 
 %description
@@ -50,7 +43,7 @@ Summary:	Speex library - development files
 Summary(pl.UTF-8):	Pliki dla programistów używających biblioteki Speex
 Group:		Development/Libraries
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Obsoletes:	Speex-devel
+Obsoletes:	Speex-devel < 1.1
 
 %description devel
 Speex library - development files.
@@ -63,7 +56,7 @@ Summary:	Speex static library
 Summary(pl.UTF-8):	Biblioteka statyczna Speex
 Group:		Development/Libraries
 Requires:	%{name}-devel = %{epoch}:%{version}-%{release}
-Obsoletes:	Speex-static
+Obsoletes:	Speex-static < 1.1
 
 %description static
 Speex static library.
@@ -76,7 +69,7 @@ Summary:	speexdec and speexenc utilities
 Summary(pl.UTF-8):	Narzędzia speexdec i speexenc
 Group:		Applications/Sound
 Requires:	%{name} = %{epoch}:%{version}-%{release}
-Obsoletes:	Speex-progs
+Obsoletes:	Speex-progs < 1.1
 
 %description progs
 Utilities for the Speex codec: speexdec (decodes a Speex file and
@@ -90,7 +83,6 @@ przy użyciu kodeka Speex).
 
 %prep
 %setup -q
-%patch0 -p1
 
 %build
 %{__libtoolize}
@@ -106,6 +98,7 @@ przy użyciu kodeka Speex).
 
 %install
 rm -rf $RPM_BUILD_ROOT
+
 %{__make} install \
 	DESTDIR=$RPM_BUILD_ROOT \
 	doc_DATA=
